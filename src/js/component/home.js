@@ -8,10 +8,25 @@ export function Home(props) {
 
 	function appendArray(element) {
 		toDoList.push(element);
+		console.log(toDoList);
 	}
+
+	const handleKeyPress = event => {
+		if (event.key === "Enter") {
+			let value = document.getElementById("input-text").value;
+			appendArray(value);
+		}
+	};
 
 	return (
 		<div>
+			<input
+				className="form-control"
+				id="input-text"
+				type="text"
+				placeholder="Default input"
+				onKeyPress={handleKeyPress}
+			/>
 			<ul className="list-group">
 				{toDoList.map(function(item, index) {
 					{
