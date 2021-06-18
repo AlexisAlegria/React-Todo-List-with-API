@@ -3,8 +3,9 @@ import PropTypes from "prop-types";
 
 export default function Lista(props) {
 	// console.log(props.contenido);
-	function alerta(elem) {
-		alert(elem);
+	function alerta(data) {
+		console.log("el elemento recibido es ", data);
+		alert(data);
 	}
 
 	return (
@@ -12,13 +13,14 @@ export default function Lista(props) {
 			<li
 				className="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
 				id={props.id}
-				onClick={e => this.alerta(e.target.id)}>
-				{/* No Logro que obtenga el ID del elemento clickeado */}
+				// onClick={e => alerta(e.target.id)}
+			>
 				El presente elemento es &quot;{props.contenido}&quot;
 				<span>
 					<a href="#">
 						<i
-							// onClick={() => alerta(this)}
+							id={props.id}
+							onClick={e => alerta(e.target.id)}
 							className="fas fa-times"></i>
 					</a>
 				</span>
