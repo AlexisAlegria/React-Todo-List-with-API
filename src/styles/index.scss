@@ -11,3 +11,15 @@
     import 'relative/path/to/stylesheet.scss';
 
 */
+
+.list-group-item i{
+    visibility: hidden;
+}
+
+.list-group-item:hover i{
+    visibility: visible;
+}
+
+.fa-times {
+    color: darkred;
+}

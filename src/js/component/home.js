@@ -1,24 +1,39 @@
 import React from "react";
-
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
+import PropTypes from "prop-types";
+import Lista from "./lista.js";
 
 //create your first component
-export function Home() {
+export function Home(props) {
+	let toDoList = ["holi", "chao", "elemento3"];
+
+	function appendArray(element) {
+		toDoList.push(element);
+	}
+
+	// let lista = "";
+	// function mapArray() {
+	// 	for (let i = 0; i < toDoList.length; i++) {
+	// 		return <Lista />;
+	// 	}
+	// }
+
 	return (
-		<div className="text-center mt-5">
-			<h1>Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
+		<div>
+			<ul className="list-group">
+				{/* {mapArray()} */}
+
+				{toDoList.map(function(item, index) {
+					// console.log(item);
+					{
+						return <Lista contenido={item} id={index} />;
+					}
+				})}
+
+				{/* <Lista /> */}
+			</ul>
 		</div>
 	);
 }
+Home.propTypes = {
+	texto: PropTypes.string
+};
