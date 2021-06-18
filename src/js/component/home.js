@@ -10,26 +10,14 @@ export function Home(props) {
 		toDoList.push(element);
 	}
 
-	// let lista = "";
-	// function mapArray() {
-	// 	for (let i = 0; i < toDoList.length; i++) {
-	// 		return <Lista />;
-	// 	}
-	// }
-
 	return (
 		<div>
 			<ul className="list-group">
-				{/* {mapArray()} */}
-
 				{toDoList.map(function(item, index) {
-					// console.log(item);
 					{
 						return <Lista contenido={item} id={index} />;
 					}
 				})}
-
-				{/* <Lista /> */}
 			</ul>
 		</div>
 	);
