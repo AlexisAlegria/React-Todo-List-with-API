@@ -1,22 +1,18 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Lista from "./lista.js";
+import React, { useState } from "react";
+// import PropTypes from "prop-types";
+// import Lista from "./lista.js";
 
-//create your first component
 export function Home(props) {
-	let toDoList = ["Elemento 1", "Elemento 2"];
-
-	function appendArray(element) {
-		toDoList.push(element);
-		console.log(toDoList);
-	}
+	const [array, setArray] = useState(["Elemento 1", "Elemento 2"]);
 
 	const handleKeyPress = event => {
 		if (event.key === "Enter") {
-			let value = document.getElementById("input-text").value;
-			appendArray(value);
-			console.log("el arreglo es ", { toDoList });
-			document.getElementById("input-text").value = "";
+			// let value = document.getElementById("input-text").value; -Esta forma no se usa
+			// let value = event.target.value;
+			// setArray(array.push(value)); -> Si uso push, no funciona la funcion map
+			setArray(array.concat(event.target.value));
+			console.log("el arreglo nuevo es ", array);
+			event.target.value = "";
 		}
 	};
 
@@ -30,19 +26,56 @@ export function Home(props) {
 				onKeyPress={handleKeyPress}
 			/>
 			<ul className="list-group">
-				{toDoList.map(function(item, index) {
-					{
-						return <Lista contenido={item} id={index} />;
-					}
+				{/* {array.map(function(item, index) {
+					return (
+						<li
+							key={index}
+							className="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+							{item}
+							<span>
+								<a href="#">
+									<i
+										id={index}
+										// onClick={e => borrar(e.target.id)}
+										className="fas fa-times"></i>
+								</a>
+							</span>
+						</li>
+					);
+				})} */}
+
+				{array.map((item, index) => {
+					console.log(
+						"trabajando el elemento ",
+						item,
+						"; en el index ",
+						index
+					);
+					return (
+						<li
+							key={index}
+							className="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+							{item}
+							<span>
+								<a href="#">
+									<i
+										id={index}
+										// onClick={e => borrar(e.target.id)}
+										className="fas fa-times"></i>
+								</a>
+							</span>
+						</li>
+					);
 				})}
+
 				<li className="list-group-item counter" id="task-counter">
-					{toDoList.length}{" "}
-					{toDoList.length > 1 ? "items left" : "item left"}
+					{array.length}{" "}
+					{array.length > 1 ? "items left" : "item left"}
 				</li>
 			</ul>
 		</div>
 	);
 }
-Home.propTypes = {
-	texto: PropTypes.string
-};
+// Home.propTypes = {
+// 	texto: PropTypes.string
+// };
