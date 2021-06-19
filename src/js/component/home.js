@@ -4,7 +4,7 @@ export function Home(props) {
 	const [array, setArray] = useState(["Elemento 1", "Elemento 2"]);
 
 	const handleKeyPress = event => {
-		if (event.key === "Enter") {
+		if (event.key === "Enter" && event.target.value !== "") {
 			// let value = document.getElementById("input-text").value; -Esta forma no se usa
 			// setArray(array.push(value)); -> Si uso push, no funciona la funcion map
 			setArray(array.concat(event.target.value));
@@ -14,7 +14,7 @@ export function Home(props) {
 	};
 
 	const borrar = data => {
-		alert(data);
+		console.log("se borrara el elemento ", data, " del array");
 	};
 
 	return (
