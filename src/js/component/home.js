@@ -1,24 +1,29 @@
 import React, { useState } from "react";
 
 export function Home(props) {
-	const [array, setArray] = useState(["Elemento 1", "Elemento 2"]);
+	const [array, setArray] = useState([
+		"Add your own elements",
+		"And clear them!"
+	]);
 
-	const handleKeyPress = event => {
-		if (event.key === "Enter" && event.target.value !== "") {
+	const handleKeyPress = e => {
+		if (e.key === "Enter" && e.target.value !== "") {
 			// let value = document.getElementById("input-text").value; -Esta forma no se usa
 			// setArray(array.push(value)); -> Si uso push, no funciona la funcion map
-			setArray(array.concat(event.target.value));
+			setArray(array.concat(e.target.value));
 			console.log("el arreglo nuevo es ", array);
-			event.target.value = "";
+			e.target.value = "";
 		}
 	};
 
 	const borrar = data => {
 		console.log("se borrara el elemento ", data, " del array");
+		setArray(array.filter(item => item !== array[data]));
 	};
 
 	return (
 		<div>
+			<h1 className="text-center">Simple to-do List</h1>
 			<input
 				className="form-control"
 				id="input-text"
@@ -53,7 +58,11 @@ export function Home(props) {
 
 				<li className="list-group-item counter" id="task-counter">
 					{array.length}{" "}
-					{array.length > 1 ? "items left" : "item left"}
+					{array.length > 1
+						? "items left"
+						: array.length === 1
+						? "item left"
+						: "items left. Add your first!"}
 				</li>
 			</ul>
 		</div>
