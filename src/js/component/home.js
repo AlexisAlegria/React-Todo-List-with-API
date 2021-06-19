@@ -28,7 +28,7 @@ export function Home(props) {
 				className="form-control"
 				id="input-text"
 				type="text"
-				placeholder="Default input"
+				placeholder="Add your to-do's"
 				onKeyPress={handleKeyPress}
 			/>
 			<ul className="list-group">
