@@ -4,7 +4,7 @@ import Lista from "./lista.js";
 
 //create your first component
 export function Home(props) {
-	let toDoList = ["holi", "chao", "elemento3"];
+	let toDoList = ["Elemento 1", "Elemento 2"];
 
 	function appendArray(element) {
 		toDoList.push(element);
@@ -15,6 +15,8 @@ export function Home(props) {
 		if (event.key === "Enter") {
 			let value = document.getElementById("input-text").value;
 			appendArray(value);
+			console.log("el arreglo es ", { toDoList });
+			document.getElementById("input-text").value = "";
 		}
 	};
 
@@ -33,6 +35,10 @@ export function Home(props) {
 						return <Lista contenido={item} id={index} />;
 					}
 				})}
+				<li className="list-group-item counter" id="task-counter">
+					{toDoList.length}{" "}
+					{toDoList.length > 1 ? "items left" : "item left"}
+				</li>
 			</ul>
 		</div>
 	);

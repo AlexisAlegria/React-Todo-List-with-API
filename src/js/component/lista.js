@@ -3,24 +3,20 @@ import PropTypes from "prop-types";
 
 export default function Lista(props) {
 	// console.log(props.contenido);
-	function alerta(data) {
-		console.log("el elemento recibido es ", data);
+	function borrar(data) {
+		// console.log("el elemento recibido es ", data);
 		alert(data);
 	}
 
 	return (
 		<div>
-			<li
-				className="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-				id={props.id}
-				// onClick={e => alerta(e.target.id)}
-			>
-				El presente elemento es &quot;{props.contenido}&quot;
+			<li className="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+				{props.contenido}
 				<span>
 					<a href="#">
 						<i
 							id={props.id}
-							onClick={e => alerta(e.target.id)}
+							onClick={e => borrar(e.target.id)}
 							className="fas fa-times"></i>
 					</a>
 				</span>
