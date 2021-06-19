@@ -20,8 +20,13 @@
     visibility: visible;
 }
 
-.fa-times {
-    color: darkred;
+.fa-check-square {
+    color: darkslategrey;
+}
+
+.fa-check-square:hover {
+    color: #28a745;
+    font-weight: 600;
 }
 
 .counter {
@@ -33,4 +38,12 @@
 
 .text-center {
     padding: 10px;
+}
+
+.list-group-item-action:hover {
+    background-color: rgba(40, 167, 70, 0.05);
+}
+
+.footer {
+    height: 60px;
 }

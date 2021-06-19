@@ -25,13 +25,13 @@ export function Home(props) {
 		<div>
 			<h1 className="text-center">Simple to-do List</h1>
 			<input
-				className="form-control"
+				className="form-control shadow"
 				id="input-text"
 				type="text"
 				placeholder="Add your to-do's"
 				onKeyPress={handleKeyPress}
 			/>
-			<ul className="list-group">
+			<ul className="list-group shadow">
 				{array.map((item, index) => {
 					console.log(
 						"trabajando el elemento ",
@@ -49,7 +49,7 @@ export function Home(props) {
 									<i
 										id={index}
 										onClick={e => borrar(e.target.id)}
-										className="fas fa-times"></i>
+										className="far fa-check-square"></i>
 								</a>
 							</span>
 						</li>
