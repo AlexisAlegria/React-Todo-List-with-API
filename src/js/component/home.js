@@ -22,7 +22,7 @@ export function Home(props) {
 			// console.log("pre setArray ", array);
 			// setArray(array.concat(arreglo));
 			e.target.value = "";
-			console.log("post setArray ", array);
+			console.log("post setArray ", array); //Por alguna razon, no actualiza el estado en esta misma funcion
 		}
 	};
 
