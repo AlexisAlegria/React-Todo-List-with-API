@@ -2,22 +2,32 @@ import React, { useState } from "react";
 
 export function Home(props) {
 	const [array, setArray] = useState([
-		"Add your own elements",
-		"And clear them!"
+		{ label: "HOLI", done: false },
+		{ label: "HOLI2", done: false }
 	]);
+
+	// console.log(array); //Reviso el objeto creado
 
 	const handleKeyPress = e => {
 		if (e.key === "Enter" && e.target.value !== "") {
-			// let value = document.getElementById("input-text").value; -Esta forma no se usa
-			// setArray(array.push(value)); -> Si uso push, no funciona la funcion map
-			setArray(array.concat(e.target.value));
+			// let content = e.target.value;
+
+			// setArray(array.concat(e.target.value));
 			// console.log("el arreglo nuevo es ", array);
+			let arreglo = { label: e.target.value, done: "false" };
+
+			setArray(
+				array.concat({ label: `${e.target.value}`, done: "false" })
+			);
+			// console.log("pre setArray ", array);
+			// setArray(array.concat(arreglo));
 			e.target.value = "";
+			console.log("post setArray ", array);
 		}
 	};
 
 	const borrar = data => {
-		// console.log("se borrara el elemento ", data, " del array");
+		console.log("se borrara el elemento ", data, " del array");
 		setArray(array.filter(item => item !== array[data]));
 	};
 
@@ -33,12 +43,17 @@ export function Home(props) {
 			/>
 			<ul className="list-group shadow">
 				{array.map((item, index) => {
-					// console.log("trabajando el elemento ", item,	"; en el index ", index);
+					console.log(
+						"trabajando el elemento ",
+						item,
+						"; en el index ",
+						index
+					);
 					return (
 						<li
 							key={index}
 							className="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-							{item}
+							{item.label}
 							<span>
 								<a href="#">
 									<i
