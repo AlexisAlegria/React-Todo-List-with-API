@@ -3,37 +3,28 @@ import React, { useState, useEffect } from "react";
 export function Home(props) {
 	const [array, setArray] = useState([]);
 
-	// Obtengo los todos via api
-
+	// Obtengo los To-Dos via api
 	const llamaToDo = () => {
 		fetch("https://assets.breatheco.de/apis/fake/todos/user/apolopino", {
 			method: "GET",
-			// body: JSON.stringify(todos),
 			headers: {
 				"Content-Type": "application/json"
 			}
 		})
 			.then(resp => resp.json())
 			.then(data => setArray(data));
-
-		// 	{
-		// 	console.log("la respuesta es ", resp.ok); // will be true if the response is successfull
-		// 	console.log("el status es ", resp.status); // the status code = 200 or code = 400 etc.
-		// 	console.log(resp.text()); // will try return the exact result as string
-		// 	return resp.json(); // (returns promise) will try to parse the result as json as return a promise that you can .then for results
-		// })
-		// .then(data => {
-		// 	//here is were your code should start after the fetch finishes
-		// 	console.log(data); //this will print on the console the exact object received from the server
-		// 	setArray(data);
-		// })
-		// .catch(error => {
-		// 	//error handling
-		// 	console.log(error);
-		// });
 	};
 
-	// console.log(array); //Reviso el objeto creado
+	//Pusheo el nuevo array
+	const updateToDo = array => {
+		fetch("https://assets.breatheco.de/apis/fake/todos/user/apolopino", {
+			method: "PUT",
+			body: JSON.stringify(array),
+			headers: {
+				"Content-Type": "application/json"
+			}
+		}).then(resp => resp.json());
+	};
 
 	const handleKeyPress = e => {
 		if (e.key === "Enter" && e.target.value !== "") {
@@ -44,7 +35,9 @@ export function Home(props) {
 			let arreglo = { label: e.target.value, done: "false" };
 
 			setArray(
-				array.concat({ label: `${e.target.value}`, done: "false" })
+				array.concat({ label: `${e.target.value}`, done: false }),
+				updateToDo(array),
+				console.log(JSON.stringify(array))
 			);
 
 			// console.log("pre setArray ", array);
@@ -56,7 +49,10 @@ export function Home(props) {
 
 	const borrar = data => {
 		console.log("se borrara el elemento ", data, " del array");
-		setArray(array.filter(item => item !== array[data]));
+		setArray(
+			array.filter(item => item !== array[data]),
+			updateToDo(array)
+		);
 	};
 
 	useEffect(() => {
@@ -75,12 +71,12 @@ export function Home(props) {
 			/>
 			<ul className="list-group shadow">
 				{array.map((item, index) => {
-					console.log(
-						"renderizando el elemento ",
-						item,
-						"; en el index ",
-						index
-					);
+					// console.log(
+					// 	"renderizando el elemento ",
+					// 	item,
+					// 	"; en el index ",
+					// 	index
+					// );
 					return (
 						<li
 							key={index}
