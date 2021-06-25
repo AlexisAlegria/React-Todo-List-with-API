@@ -23,14 +23,12 @@ export function Home(props) {
 			headers: {
 				"Content-Type": "application/json"
 			}
-		}).then(resp => resp.json());
+		}).then(resp => llamaToDo());
 	};
 
 	const handleKeyPress = e => {
 		if (e.key === "Enter" && e.target.value !== "") {
-			// let content = e.target.value;
-
-			// setArray(array.concat(e.target.value));
+			// setArray(array.concat(e.target.value)); //Sirve solo para arrays, ahora es objeto
 			// console.log("el arreglo nuevo es ", array);
 			let arreglo = { label: e.target.value, done: "false" };
 
@@ -39,6 +37,7 @@ export function Home(props) {
 				updateToDo(array),
 				console.log(JSON.stringify(array))
 			);
+			//Hay un problema: setState no llega con el nuevo array para hacer el update en la API ni en console. MAnu recomienda usar un boton y ver que pasa
 
 			// console.log("pre setArray ", array);
 			// setArray(array.concat(arreglo));
