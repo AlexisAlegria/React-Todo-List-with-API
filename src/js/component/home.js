@@ -16,31 +16,27 @@ export function Home(props) {
 	};
 
 	//Pusheo el nuevo array
-	const updateToDo = array => {
+	const updateToDo = newData => {
 		fetch("https://assets.breatheco.de/apis/fake/todos/user/apolopino", {
 			method: "PUT",
-			body: JSON.stringify(array),
+			body: JSON.stringify(newData),
 			headers: {
 				"Content-Type": "application/json"
 			}
-		}).then(resp => llamaToDo());
+		});
+		// .then(resp => llamaToDo());
 	};
 
 	const handleKeyPress = e => {
 		if (e.key === "Enter" && e.target.value !== "") {
-			// setArray(array.concat(e.target.value)); //Sirve solo para arrays, ahora es objeto
-			// console.log("el arreglo nuevo es ", array);
-			let arreglo = { label: e.target.value, done: "false" };
+			let arreglo = { label: e.target.value, done: false };
 
 			setArray(
 				array.concat({ label: `${e.target.value}`, done: false }),
-				updateToDo(array),
-				console.log(JSON.stringify(array))
+				updateToDo([...array, arreglo])
 			);
 			//24/junio: Hay un problema: setState no llega con el nuevo array para hacer el update en la API ni en console. MAnu recomienda usar un boton y ver que pasa
 
-			// console.log("pre setArray ", array);
-			// setArray(array.concat(arreglo));
 			e.target.value = "";
 			console.log("post setArray ", array); //Por alguna razon, no actualiza el estado en esta misma funcion
 		}
@@ -48,10 +44,8 @@ export function Home(props) {
 
 	const borrar = data => {
 		console.log("se borrara el elemento ", data, " del array");
-		setArray(
-			array.filter(item => item !== array[data]),
-			updateToDo(array)
-		);
+		let nuevoToDo = array.filter(item => item !== array[data]);
+		setArray(nuevoToDo, updateToDo(nuevoToDo));
 	};
 
 	useEffect(() => {
