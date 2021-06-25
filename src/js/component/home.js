@@ -37,7 +37,7 @@ export function Home(props) {
 				updateToDo(array),
 				console.log(JSON.stringify(array))
 			);
-			//Hay un problema: setState no llega con el nuevo array para hacer el update en la API ni en console. MAnu recomienda usar un boton y ver que pasa
+			//24/junio: Hay un problema: setState no llega con el nuevo array para hacer el update en la API ni en console. MAnu recomienda usar un boton y ver que pasa
 
 			// console.log("pre setArray ", array);
 			// setArray(array.concat(arreglo));
