@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 export function Home(props) {
 	const [array, setArray] = useState([]);
 
-	// Obtengo los To-Dos via api
 	const llamaToDo = () => {
 		fetch("https://assets.breatheco.de/apis/fake/todos/user/apolopino", {
 			method: "GET",
@@ -15,7 +14,6 @@ export function Home(props) {
 			.then(data => setArray(data));
 	};
 
-	//Pusheo el nuevo array
 	const updateToDo = newData => {
 		fetch("https://assets.breatheco.de/apis/fake/todos/user/apolopino", {
 			method: "PUT",
@@ -24,7 +22,7 @@ export function Home(props) {
 				"Content-Type": "application/json"
 			}
 		});
-		// .then(resp => llamaToDo());
+		// .then(resp => llamaToDo()); --> Para volver a llamar los to-dos y verificar que se están guardados.
 	};
 
 	const handleKeyPress = e => {
@@ -35,15 +33,11 @@ export function Home(props) {
 				array.concat({ label: `${e.target.value}`, done: false }),
 				updateToDo([...array, arreglo])
 			);
-			//24/junio: Hay un problema: setState no llega con el nuevo array para hacer el update en la API ni en console. MAnu recomienda usar un boton y ver que pasa
-
 			e.target.value = "";
-			console.log("post setArray ", array); //Por alguna razon, no actualiza el estado en esta misma funcion
 		}
 	};
 
 	const borrar = data => {
-		console.log("se borrara el elemento ", data, " del array");
 		let nuevoToDo = array.filter(item => item !== array[data]);
 		setArray(nuevoToDo, updateToDo(nuevoToDo));
 	};
@@ -64,12 +58,6 @@ export function Home(props) {
 			/>
 			<ul className="list-group shadow">
 				{array.map((item, index) => {
-					// console.log(
-					// 	"renderizando el elemento ",
-					// 	item,
-					// 	"; en el index ",
-					// 	index
-					// );
 					return (
 						<li
 							key={index}
