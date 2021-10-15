@@ -18,6 +18,7 @@ export function App(props) {
 	};
 
 	const updateToDo = newData => {
+		console.log(newData);
 		fetch(
 			"https://assets.breatheco.de/apis/fake/todos/user/alexisalegria",
 			{
@@ -28,6 +29,29 @@ export function App(props) {
 				}
 			}
 		);
+	};
+
+	const deleteToDo = () => {
+		fetch(
+			"https://assets.breatheco.de/apis/fake/todos/user/alexisalegria",
+			{
+				method: "DELETE",
+				headers: {
+					"Content-Type": "application/json"
+				}
+			}
+		).then(() => {
+			fetch(
+				"https://assets.breatheco.de/apis/fake/todos/user/alexisalegria",
+				{
+					method: "POST",
+					body: JSON.stringify([]),
+					headers: {
+						"Content-Type": "application/json"
+					}
+				}
+			);
+		});
 	};
 
 	const handleKeyPress = e => {
@@ -46,9 +70,8 @@ export function App(props) {
 		setArray(deleteOneTask, updateToDo(deleteOneTask));
 	};
 
-	const deleteAll = id => {
-		let deleteAllTasks = array.filter(item => item === array[id]);
-		setArray(deleteAllTasks, updateToDo(deleteAllTasks));
+	const deleteAll = () => {
+		setArray([], deleteToDo());
 	};
 
 	useEffect(() => {
@@ -69,21 +92,23 @@ export function App(props) {
 					/>
 					<ul className="list-group shadow">
 						{array.map((item, index) => {
-							return (
-								<li
-									key={index}
-									className="list-group-item list-group-i	tem-action d-flex justify-content-between align-items-center">
-									{item.label}
-									<span>
-										<i
-											id={index}
-											onClick={e =>
-												deleteOne(e.target.id)
-											}
-											className="far fa-trash-alt"></i>
-									</span>
-								</li>
-							);
+							if (item.label.length > 0) {
+								return (
+									<li
+										key={index}
+										className="list-group-item list-group-i	tem-action d-flex justify-content-between align-items-center">
+										{item.label}
+										<span>
+											<i
+												id={index}
+												onClick={e =>
+													deleteOne(e.target.id)
+												}
+												className="far fa-trash-alt"></i>
+										</span>
+									</li>
+								);
+							}
 						})}
 
 						<li
