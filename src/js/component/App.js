@@ -41,9 +41,14 @@ export function App(props) {
 		}
 	};
 
-	const borrar = data => {
-		let deletedTodo = array.filter(item => item !== array[data]);
-		setArray(deletedTodo, updateToDo(deletedTodo));
+	const deleteOne = id => {
+		let deleteOneTask = array.filter(item => item !== array[id]);
+		setArray(deleteOneTask, updateToDo(deleteOneTask));
+	};
+
+	const deleteAll = id => {
+		let deleteAllTasks = array.filter(item => item === array[id]);
+		setArray(deleteAllTasks, updateToDo(deleteAllTasks));
 	};
 
 	useEffect(() => {
@@ -67,12 +72,14 @@ export function App(props) {
 							return (
 								<li
 									key={index}
-									className="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+									className="list-group-item list-group-i	tem-action d-flex justify-content-between align-items-center">
 									{item.label}
 									<span>
 										<i
 											id={index}
-											onClick={e => borrar(e.target.id)}
+											onClick={e =>
+												deleteOne(e.target.id)
+											}
 											className="far fa-trash-alt"></i>
 									</span>
 								</li>
@@ -90,6 +97,14 @@ export function App(props) {
 								: "items left. Add your first!"}
 						</li>
 					</ul>
+					<div>
+						<button
+							type="button"
+							className="btn btn-danger mt-3"
+							onClick={deleteAll}>
+							Delete all Tasks
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>
